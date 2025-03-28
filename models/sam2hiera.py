@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from sam2.build_sam import build_sam2
 from matplotlib import rcParams
-from sam2dino_seg.self_transforms import transforms_image
+from sam2dino_seg.self_transforms.preprocess_image import transforms_image
 from visualize.features_vis import visualize_feature_maps_mean, visualize_feature_maps_pca, visualize_feature_maps_tsne
 # 设置全局字体为 SimHei（黑体）
 rcParams['font.sans-serif'] = ['SimHei']  # 指定默认字体
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     config_file = r"G:\MyProjectCode\SAM2DINO-Seg\sam2_configs\sam2.1_hiera_l.yaml"
     ckpt_path = r"G:\MyProjectCode\SAM2DINO-Seg\checkpoints\sam2.1_hiera_large.pt"
     # 预处理图像
-    image_path = r"G:\MyProjectCode\SAM2DINO-Seg\data\images\R-C.jpg"  # 替换为您的图像路径
+    image_path = r"G:\MyProjectCode\SAM2DINO-Seg\data\images\COD10K-CAM-1-Aquatic-3-Crab-29.jpg"  # 替换为您的图像路径
     x = transforms_image(image_path, image_size=352)
     with torch.no_grad():
         model = sam2hiera(config_file, ckpt_path).cuda()

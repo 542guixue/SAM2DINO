@@ -2,6 +2,7 @@ import torch
 import numpy as np
 from matplotlib import rcParams
 from sam2dino_seg.self_transforms.preprocess_image import transforms_image
+from visualize.features_vis import visualize_feature_maps_mean,visualize_feature_maps_pca,visualize_feature_maps_tsne
 
 # 设置全局字体为 SimHei（黑体）
 rcParams['font.sans-serif'] = ['SimHei']  # 指定默认字体
@@ -98,7 +99,7 @@ if __name__ == "__main__":
     model = load_dinov2_model("dinov2_vitl14")
     
     # 预处理图像
-    image_path = r"G:\MyProjectCode\SAM2DINO-Seg\data\images\R-C.jpg"  # 替换为您的图像路径
+    image_path = r"G:\MyProjectCode\SAM2DINO-Seg\data\images\COD10K-CAM-1-Aquatic-3-Crab-29.jpg"  # 替换为您的图像路径
     image = transforms_image(image_path)
 
     # 提取特征
@@ -111,13 +112,13 @@ if __name__ == "__main__":
     print(f"中级特征形状 (中等尺度): {features['mid_level'].shape}")
     print(f"低级特征形状 (局部尺度): {features['low_level'].shape}")
     
-    # # 可视化特征
-    # visualize_feature_maps_mean(features,backbone_name="DINOv2")
-    #
-    # # PCA可视化
-    # visualize_feature_maps_pca(features,backbone_name="DINOv2")
-    #
-    # # T-SNE可视化
-    # visualize_feature_maps_tsne(features,backbone_name="DINOv2")
+    # 可视化特征
+    visualize_feature_maps_mean(features,backbone_name="DINOv2")
+
+    # PCA可视化
+    visualize_feature_maps_pca(features,backbone_name="DINOv2")
+
+    # T-SNE可视化
+    visualize_feature_maps_tsne(features,backbone_name="DINOv2")
 
     print("DINOv2多尺度特征提取完成!")

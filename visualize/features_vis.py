@@ -44,28 +44,28 @@ def visualize_feature_maps_mean(features,backbone_name = "default"):
     # 绘制顶级特征图
     plt.subplot(1, 4, 1)
     plt.imshow(top_level_pca.numpy(), cmap='viridis')
-    plt.title('顶级特征图 (顶级尺度)')
+    plt.title('Level3 Feature Map')
     plt.colorbar()
 
     # 绘制高级特征图
     plt.subplot(1, 4, 2)
     plt.imshow(high_level_pca.numpy(), cmap='viridis')
-    plt.title('高级特征图 (高等尺度)')
+    plt.title('Level2 Feature Map')
     plt.colorbar()
     
     # 绘制中级特征图
     plt.subplot(1, 4, 3)
     plt.imshow(mid_level_pca.numpy(), cmap='viridis')
-    plt.title('中级特征图 (中等尺度)')
+    plt.title('Level1 Feature Map')
     plt.colorbar()
     
     # 绘制低级特征图
     plt.subplot(1, 4, 4)
     plt.imshow(low_level_pca.numpy(), cmap='viridis')
-    plt.title('低级特征图 (局部尺度)')
+    plt.title('Level0 Feature Map')
     plt.colorbar()
 
-    plt.suptitle('均值特征图可视化', fontsize=16)
+    plt.suptitle('Mean Feature Map Visualization', fontsize=16)
 
     plt.tight_layout()
     plt.savefig('../visualize/pic/{backbone_name}_multiscale_features_mean.png'.format(backbone_name=backbone_name))
@@ -104,28 +104,28 @@ def visualize_feature_maps_tsne(features, backbone_name = "default"):
     # 绘制顶级特征图
     plt.subplot(1, 4, 1)
     plt.scatter(top_level_tsne[:, 0], top_level_tsne[:, 1], c='blue', s=1)
-    plt.title('顶级特征图 (顶级尺度)')
+    plt.title('Level3 Feature Map')
     plt.colorbar()
 
     # 绘制高级特征图
     plt.subplot(1, 4, 2)
     plt.scatter(high_level_tsne[:, 0], high_level_tsne[:, 1], c='blue', s=1)
-    plt.title('高级特征图 (高等尺度)')
+    plt.title('Level2 Feature Map')
     plt.colorbar()
     
     # 绘制中级特征图
     plt.subplot(1, 4, 3)
     plt.scatter(mid_level_tsne[:, 0], mid_level_tsne[:, 1], c='green', s=1)
-    plt.title('中级特征图 (中等尺度)')
+    plt.title('Level1 Feature Map')
     plt.colorbar()
     
     # 绘制低级特征图
     plt.subplot(1, 4, 4)
     plt.scatter(low_level_tsne[:, 0], low_level_tsne[:, 1], c='red', s=1)
-    plt.title('低级特征图 (局部尺度)')
+    plt.title('Level0 Feature Map')
     plt.colorbar()
 
-    plt.suptitle('T-SNE特征图可视化', fontsize=16)
+    plt.suptitle('T-SNE Feature Map Visualization', fontsize=16)
 
     plt.tight_layout()
     plt.savefig('../visualize/pic/{backbone_name}_multiscale_features_tsne.png'.format(backbone_name=backbone_name))
@@ -164,28 +164,28 @@ def visualize_feature_maps_pca(features,backbone_name = "default"):
     # 绘制顶级特征图
     plt.subplot(1, 4, 1)
     plt.imshow(top_level_pca.reshape(int(np.sqrt(len(top_level_pca))), -1), cmap='viridis')
-    plt.title('顶级特征图 (顶级尺度)')
+    plt.title('Level3 Feature Map')
     plt.colorbar()
 
     # 绘制高级特征图
     plt.subplot(1, 4, 2)
     plt.imshow(high_level_pca.reshape(int(np.sqrt(len(high_level_pca))), -1), cmap='viridis')
-    plt.title('高级特征图 (高等尺度)')
+    plt.title('Level2 Feature Map')
     plt.colorbar()
     
     # 绘制中级特征图
     plt.subplot(1, 4, 3)
     plt.imshow(mid_level_pca.reshape(int(np.sqrt(len(mid_level_pca))), -1), cmap='viridis')
-    plt.title('中级特征图 (中等尺度)')
+    plt.title('Level1 Feature Map')
     plt.colorbar()
     
     # 绘制低级特征图
     plt.subplot(1, 4, 4)
     plt.imshow(low_level_pca.reshape(int(np.sqrt(len(low_level_pca))), -1), cmap='viridis')
-    plt.title('低级特征图 (局部尺度)')
+    plt.title('Level0 Feature Map')
     plt.colorbar()
 
-    plt.suptitle('PCA特征图可视化', fontsize=16)
+    plt.suptitle('PCA Feature Map Visualization', fontsize=16)
 
     plt.tight_layout()
     plt.savefig('../visualize/pic/{backbone_name}_multiscale_features_pca.png'.format(backbone_name=backbone_name))
