@@ -270,15 +270,31 @@ class Hiera(nn.Module):
                 chkpt = torch.load(f, map_location="cpu")
             logging.info("loading Hiera", self.load_state_dict(chkpt, strict=False))
 
+    #插值到窗口能被整除的尺寸
+    # 1. 向上取整到8的倍数
+    
     def _get_pos_embed(self, hw: Tuple[int, int]) -> torch.Tensor:
+        #h, w = hw
+        
+        def ceil_to_multiple(x, base):
+            return ((x + base - 1) // base) * base
         h, w = hw
-        window_embed = self.pos_embed_window
-        pos_embed = F.interpolate(self.pos_embed, size=(h, w), mode="bicubic")
+        h_new = ceil_to_multiple(h, 8)
+        w_new = ceil_to_multiple(w, 8)
+        pos_embed = F.interpolate(self.pos_embed, size=(h_new, w_new), mode="bicubic", align_corners=False)
+
+        window_embed = self.pos_embed_window#1,144,8,8
+        #pos_embed = F.interpolate(self.pos_embed, size=(h, w), mode="bicubic")#1,144,88,88
+        print("pos_embed.shape:", pos_embed.shape)
+        print("window_embed.shape:", window_embed.shape)
+        print("pos_embed shape after permute:", pos_embed.permute(0, 2, 3, 1).shape)
         pos_embed = pos_embed + window_embed.tile(
             [x // y for x, y in zip(pos_embed.shape, window_embed.shape)]
         )
         pos_embed = pos_embed.permute(0, 2, 3, 1)
         return pos_embed
+
+
 
     def forward(self, x: torch.Tensor) -> List[torch.Tensor]:
         x = self.patch_embed(x)
